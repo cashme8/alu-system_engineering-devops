@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Lost in Space</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: cursive;
+        overflow: hidden;
+        background: #0a0e27;
+        color: #fff;
+      }
+
+      .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 3s infinite;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        z-index: 10;
+        padding: 20px;
+      }
+
+      .astronaut {
+        width: 200px;
+        height: 200px;
+        animation: float 6s ease-in-out infinite;
+        margin-bottom: 40px;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-30px) rotate(5deg);
+        }
+      }
+
+      .helmet {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #5f0505 0%, #a0004d 100%);
+        border-radius: 50%;
+        position: relative;
+        margin: 0 auto;
+        box-shadow: 0 0 40px rgba(119, 2, 37, 0.6);
+      }
+
+      .visor {
+        width: 80px;
+        height: 50px;
+        background: linear-gradient(135deg, #ef2704 0%, #ff6666 100%);
+        border-radius: 50%;
+        position: absolute;
+        top: 35px;
+        left: 20px;
+        animation: visorGlow 2s ease-in-out infinite;
+      }
+
+      @keyframes visorGlow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(119, 2, 37, 0.6);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(251, 1, 1, 0.9);
+        }
+      }
+
+      .body {
+        width: 100px;
+        height: 80px;
+        background: #ff6666;
+        border-radius: 20px;
+        position: relative;
+        margin: -10px auto 0;
+      }
+
+      .arm {
+        width: 60px;
+        height: 20px;
+        background: #ff6666;
+        border-radius: 10px;
+        position: absolute;
+        top: 20px;
+      }
+
+      .arm-left {
+        left: -50px;
+        transform: rotate(-30deg);
+      }
+
+      .arm-right {
+        right: -50px;
+        transform: rotate(30deg);
+      }
+
+      h1 {
+        font-size: 120px;
+        font-weight: bold;
+        background: linear-gradient(
+          135deg,
+          #0cae99 0%,
+          #066072 50%,
+          #040245 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 20px 0;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .subtitle {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #89f7fe;
+        text-shadow: 0 0 20px rgba(137, 247, 254, 0.5);
+      }
+
+      .message {
+        font-size: 18px;
+        color: #a0a0a0;
+        margin-bottom: 30px;
+        text-align: center;
+        max-width: 500px;
+      }
+
+      .required-text {
+        font-size: 16px;
+        color: #066072;
+        font-style: italic;
+        margin-bottom: 30px;
+      }
+
+      .btn {
+        padding: 15px 40px;
+        background: linear-gradient(
+          135deg,
+          #0cae99 0%,
+          #066072 50%,
+          #040245 100%
+        );
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 30px rgba(102, 126, 234, 0.4);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 40px rgba(102, 126, 234, 0.6);
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(23, 54, 210, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .btn span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .planet {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .planet1 {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #ef2704 0%, #ff6666 100%);
+        top: 10%;
+        left: 10%;
+        animation: orbit1 20s linear infinite;
+        box-shadow: 0 0 40px rgba(240, 147, 251, 0.4);
+      }
+
+      .planet2 {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(
+          135deg,
+          #0cae99 0%,
+          #066072 50%,
+          #040245 100%
+        );
+        bottom: 20%;
+        right: 15%;
+        animation: orbit2 15s linear infinite;
+        box-shadow: 0 0 30px rgba(79, 172, 254, 0.4);
+      }
+
+      @keyframes orbit1 {
+        0% {
+          transform: rotate(0deg) translateX(50px) rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translateX(50px) rotate(-360deg);
+        }
+      }
+
+      @keyframes orbit2 {
+        0% {
+          transform: rotate(0deg) translateX(30px) rotate(0deg);
+        }
+        100% {
+          transform: rotate(-360deg) translateX(30px) rotate(360deg);
+        }
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 80px;
+        }
+        .subtitle {
+          font-size: 20px;
+        }
+        .message {
+          font-size: 16px;
+        }
+        .astronaut {
+          width: 150px;
+          height: 150px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stars" id="stars"></div>
+    <div class="planet planet1"></div>
+    <div class="planet planet2"></div>
+
+    <div class="container">
+      <div class="astronaut">
+        <div class="helmet">
+          <div class="visor"></div>
+        </div>
+        <div class="body">
+          <div class="arm arm-left"></div>
+          <div class="arm arm-right"></div>
+        </div>
+      </div>
+
+      <h1>404</h1>
+      <div class="subtitle">This is bad!</div>
+      <div class="message">
+        The page you're looking for has been engulfed and trapped by a dead
+        star. Our astronaut is gone too, but it seems to have vanished into
+        space.
+      </div>
+      <div class="required-text">Ceci n'est pas une page</div>
+      <a href="/" class="btn"><span>Report Back to HQ</span></a>
+    </div>
+
+    <script>
+      // Generate random stars
+      const starsContainer = document.getElementById("stars");
+      const numStars = 200;
+
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+
+        const size = Math.random() * 3;
+        star.style.width = size + "px";
+        star.style.height = size + "px";
+        star.style.left = Math.random() * 100 + "%";
+        star.style.top = Math.random() * 100 + "%";
+        star.style.animationDelay = Math.random() * 3 + "s";
+        star.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+        starsContainer.appendChild(star);
+      }
+
+      // Mouse parallax effect
+      document.addEventListener("mousemove", (e) => {
+        const astronaut = document.querySelector(".astronaut");
+        const x = (e.clientX / window.innerWidth - 0.5) * 20;
+        const y = (e.clientY / window.innerHeight - 0.5) * 20;
+        astronaut.style.transform = `translate(${x}px, ${y}px)`;
+      });
+
+      // Add shooting stars occasionally
+      setInterval(() => {
+        if (Math.random() > 0.7) {
+          const shootingStar = document.createElement("div");
+          shootingStar.style.position = "fixed";
+          shootingStar.style.width = "2px";
+          shootingStar.style.height = "2px";
+          shootingStar.style.background = "white";
+          shootingStar.style.borderRadius = "50%";
+          shootingStar.style.boxShadow = "0 0 10px white";
+          shootingStar.style.left = Math.random() * 100 + "%";
+          shootingStar.style.top = Math.random() * 50 + "%";
+          shootingStar.style.animation = "shootingStar 1s linear";
+          document.body.appendChild(shootingStar);
+
+          const style = document.createElement("style");
+          style.textContent = `
+                    @keyframes shootingStar {
+                        0% { transform: translate(0, 0); opacity: 1; }
+                        100% { transform: translate(-200px, 200px); opacity: 0; }
+                    }
+                `;
+          document.head.appendChild(style);
+
+          setTimeout(() => {
+            shootingStar.remove();
+            style.remove();
+          }, 1000);
+        }
+      }, 2000);
+    </script>
+  </body>
+</html>
